@@ -25,7 +25,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         } catch (error) {
           console.error('Auth init failed:', error);
           api.clearToken();
+          // Fallback to demo user for preview
+          const demoUser: User = {
+            id: 999,
+            email: 'demo@example.com',
+            role: 'startup',
+            is_active: true,
+            created_at: new Date().toISOString()
+          };
+          setUser(demoUser);
         }
+      } else {
+        // Create demo user for preview when no token exists
+        const demoUser: User = {
+          id: 999,
+          email: 'demo@example.com',
+          role: 'startup',
+          is_active: true,
+          created_at: new Date().toISOString()
+        };
+        setUser(demoUser);
       }
       setLoading(false);
     };

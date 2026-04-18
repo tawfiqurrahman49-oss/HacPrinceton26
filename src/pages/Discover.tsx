@@ -15,8 +15,16 @@ export default function Discover() {
   const loadProfiles = async () => {
     try {
       setLoading(true);
-      const feed = await api.getFeed(20);
-      setProfiles(feed);
+      // Try to fetch from backend
+      try {
+        const feed = await api.getFeed(20);
+        setProfiles(feed);
+      } catch (apiError) {
+        // Fallback to mock data if backend is not available
+        console.log('Backend not available, using demo data');
+        const { mockProfiles } = await import('@/lib/mockData');
+        setProfiles(mockProfiles);
+      }
       setCurrentIndex(0);
     } catch (error) {
       toast.error('Failed to load profiles');
