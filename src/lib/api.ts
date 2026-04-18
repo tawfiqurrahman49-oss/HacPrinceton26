@@ -117,6 +117,19 @@ class ApiClient {
     return this.request<User>('/users/me');
   }
 
+  // OAuth
+  getOAuthUrl(provider: 'google' | 'yahoo' | 'linkedin', role: 'startup' | 'investor') {
+    return `${API_BASE_URL}/api/auth/${provider}?role=${role}`;
+  }
+
+  async handleOAuthCallback(provider: string, code: string) {
+    const response = await this.request<{ access_token: string }>(`/auth/${provider}/callback?code=${code}`, {
+      method: 'GET',
+    });
+    this.setToken(response.access_token);
+    return response;
+  }
+
   // Profiles
   async createInvestorProfile(data: Partial<InvestorProfile>) {
     return this.request<InvestorProfile>('/investors/profile', {

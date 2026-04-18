@@ -4,6 +4,7 @@ import Register from './pages/Register';
 import ProfileSetup from './pages/ProfileSetup';
 import Discover from './pages/Discover';
 import Matches from './pages/Matches';
+import OAuthCallback from './pages/OAuthCallback';
 import NotFound from "./pages/NotFound";
 
 export const routers = [
@@ -36,6 +37,21 @@ export const routers = [
       path: "/matches",
       name: 'matches',
       element: <Matches />,
+    },
+    {
+      path: "/auth/google-callback",
+      name: 'google-callback',
+      element: <OAuthCallback />,
+    },
+    {
+      path: "/auth/linkedin-callback",
+      name: 'linkedin-callback',
+      element: <OAuthCallback />,
+    },
+    {
+      path: "/auth/yahoo-callback",
+      name: 'yahoo-callback',
+      element: <OAuthCallback />,
     },
     /* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */
     {
