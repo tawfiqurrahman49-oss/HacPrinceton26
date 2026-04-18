@@ -7,6 +7,8 @@ import { AuthProvider } from './contexts/AuthContext';
 import { Layout } from './components/Layout';
 import { routers } from "./router";
 
+// Toast notifications setup
+
 const queryClient = new QueryClient();
 
 const App = () => {
